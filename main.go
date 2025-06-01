@@ -376,8 +376,10 @@ func createCommit(message string) (string, error) {
 		return "", err
 	}
 
-	// Open git repository
-	repo, err := git.PlainOpen(wd)
+	// Open git repository (search upwards from current directory)
+	repo, err := git.PlainOpenWithOptions(wd, &git.PlainOpenOptions{
+		DetectDotGit: true,
+	})
 	if err != nil {
 		return "", err
 	}
