@@ -4,7 +4,7 @@
 # Install
 
 ```
-go install github.com/suixinio/git-aicommit@latest
+go install github.com/suixinio/git-aicommit@main
 ```
 
 ## cmd
