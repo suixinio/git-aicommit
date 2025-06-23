@@ -129,12 +129,12 @@ func loadConfig() (*Config, error) {
 	viper.SetConfigName("config")
 	viper.SetConfigType("toml")
 
-	// Add config paths
-	viper.AddConfigPath(".")
+	// Add config path - only from user home directory
 	homeDir, err := os.UserHomeDir()
-	if err == nil {
-		viper.AddConfigPath(filepath.Join(homeDir, ".config", "git-aicommit"))
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user home directory: %w", err)
 	}
+	viper.AddConfigPath(filepath.Join(homeDir, ".config", "git-aicommit"))
 
 	// Try to read config
 	err = viper.ReadInConfig()
